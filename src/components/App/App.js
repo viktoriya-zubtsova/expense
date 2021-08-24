@@ -6,7 +6,7 @@ import styles from './App.module.css';
 function App() {
   const [items, setItems] = useState([]);
   const [firstValue, setFirstValue] = useState('');
-  const [secondValue, setSecondValue] = useState(0);
+  const [secondValue, setSecondValue] = useState('');
 
   useEffect(() => {
     init();
