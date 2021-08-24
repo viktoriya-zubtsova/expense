@@ -1,0 +1,25 @@
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+form > p {
+    margin-bottom: 0;
+    line-height: 30px;
+}
+#firstInput, #secondInput {
+    border: none;
+    border-radius: 3px;
+    padding: 15px;
+    width: 160px;
+}
+#firstInput {
+    width: 400px;
+}
+.button {
+    background-color: #7aa37a;
+    border: none;
+    border-radius: 3px;
+    padding: 12px 20px;
+    font-size: 18px;
+}

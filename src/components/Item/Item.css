@@ -1,0 +1,27 @@
+.item > p{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.text {
+    font-size: 26px;
+}
+.buttons {
+    padding-left: 40px;
+}
+.editText, .editSum{
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    width: 170px;
+}
+.editText {
+    width: 410px;
+}
+.editButton {
+    background-color: #7aa37a;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    width: 120px;
+}
