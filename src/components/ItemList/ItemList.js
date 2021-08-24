@@ -1,11 +1,11 @@
 import React from 'react';
 import Item from '../Item/Item';
-import styles from './ItemList.module.css';
+import './ItemList.css';
 
 function ItemList({ items, onClickEdit, onDeleteClick }) {
 
   return (
-    <ol className={styles.list}>
+    <ol className="list">
       {items.map((item, index) => (
         <li key={item._id}>
           <Item

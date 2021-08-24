@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import InputItem from '../InputItem/InputItem';
 import ItemList from '../ItemList/ItemList';
-import styles from './App.module.css';
+import './App.css';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -90,8 +90,8 @@ function App() {
   };
 
   return (
-    <div className={styles.wrap}>
-      <h1 className={styles.title}>Учёт моих расходов</h1>
+    <div className="wrap">
+      <h1 className="title">Учёт моих расходов</h1>
       <InputItem
         onButtonClick={onButtonClick}
         firstValue={firstValue}
@@ -99,7 +99,7 @@ function App() {
         setFirstValue={setFirstValue}
         setSecondValue={setSecondValue}
       />
-      <p className={styles.total}>Итого: {items.reduce((acc, item) => acc + item.sum, 0)} р.</p>
+      <p className="total">Итого: {items.reduce((acc, item) => acc + item.sum, 0)} р.</p>
       <ItemList
         items={items}
         onClickEdit={onClickEdit}

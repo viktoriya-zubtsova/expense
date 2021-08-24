@@ -12,7 +12,8 @@ function Item({ item, index, onClickEdit, onDeleteClick}) {
 
   return (
     <div className="item" id={item._id}>
-      { editing ? <p>
+      { editing
+        ? <p>
           <input
             type="text"
             className="editText"
@@ -36,8 +37,8 @@ function Item({ item, index, onClickEdit, onDeleteClick}) {
               <DeleteIcon />
             </IconButton>
           </span>
-        </p> :
-        <p>
+        </p>
+        : <p>
           <span id={`text_${item._id}`} className="text">
             {index}) {item.text} {item.date}
           </span>
@@ -47,7 +48,7 @@ function Item({ item, index, onClickEdit, onDeleteClick}) {
               <IconButton onClick={() => setEditing(true)}>
                 <EditIcon />
               </IconButton>
-              <IconButton onClick={onDeleteClick}>
+              <IconButton onClick={() => onDeleteClick(item)}>
                 <DeleteIcon />
               </IconButton>
             </span>
