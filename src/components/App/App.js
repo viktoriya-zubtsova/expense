@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import InputItem from '../InputItem/InputItem';
 import ItemList from '../ItemList/ItemList';
+import ItemsClient from '../../api/ItemsClient';
 import './App.css';
 
 function App() {
@@ -14,11 +15,8 @@ function App() {
 
   const init = async () => {
     try {
-      const response = await fetch('http://localhost:8000/items', {
-        method: 'GET'
-      });
-      let result = await response.json();
-      setItems(result.data);
+      const response = await ItemsClient.getItems();
+      setItems(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -26,22 +24,7 @@ function App() {
 
   const onButtonClick = async () => {
     try {
-      const response = await fetch('http://localhost:8000/items', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8'
-        },
-        body: JSON.stringify({
-          text: firstValue,
-          sum: secondValue,
-          date: new Date().toLocaleString('ru', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric'
-          })
-        })
-      });
-      const result = await response.json();
+      const result = await ItemsClient.postItem(firstValue, secondValue);
       setItems([...items, result]);
       setFirstValue('');
       setSecondValue('');
@@ -52,23 +35,12 @@ function App() {
 
   const onClickEdit = async ( item, editedTextValue, editedSumValue ) => {
     try {
-      await fetch(`http://localhost:8000/items/${item._id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8'
-        },
-        body: JSON.stringify({
-          text: editedTextValue,
-          sum: editedSumValue,
-          date: item.date
-        })
-      });
-
-      const response = await fetch('http://localhost:8000/items', {
-        method: 'GET'
-      });
-      let result = await response.json();
-      setItems(result.data);
+      const result = await ItemsClient.patchItem(item, editedTextValue, editedSumValue);
+      const newItems = [...items];
+      const editedItem = newItems.find(item => item._id === result._id);
+      editedItem.text = result.body.text;
+      editedItem.sum = +result.body.sum;
+      setItems(newItems);
     } catch (err) {
       console.log(err);
     }
@@ -76,14 +48,9 @@ function App() {
 
   const onDeleteClick = async (item) => {
     try {
-      await fetch(`http://localhost:8000/items/${item._id}`, {
-        method: 'DELETE'
-      });
-      const response = await fetch('http://localhost:8000/items', {
-        method: 'GET'
-      });
-      let result = await response.json();
-      setItems(result.data);
+      const result = await ItemsClient.deleteItem(item);
+      const newItems = items.filter(item => item._id !== result._id);
+      setItems(newItems);
     } catch (err) {
       console.log(err);
     }
