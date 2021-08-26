@@ -1,9 +1,9 @@
-form {
+.inputForm {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
-form > p {
+.inputForm > p {
     margin-bottom: 0;
     line-height: 30px;
 }

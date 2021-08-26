@@ -5,7 +5,7 @@ function InputItem({ onButtonClick, firstValue, secondValue, setFirstValue, setS
 
   return (
     <div>
-      <form>
+      <form className="inputForm">
         <p>Куда было потрачено:<br/>
           <input
             id="firstInput"

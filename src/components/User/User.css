@@ -1,0 +1,16 @@
+.userForm {
+    margin-top: 0;
+    display: block;
+}
+.userInput {
+    border: none;
+    border-radius: 3px;
+    padding-left: 5px;
+}
+.userButton {
+    background-color: #7aa37a;
+    border: none;
+    border-radius: 3px;
+    padding-left: 5px;
+    width: 184px;
+}

@@ -1,10 +1,14 @@
-const BASE_URL = 'https://infinite-temple-24050.herokuapp.com';
+const BASE_URL = 'http://localhost:8000';
+  // 'https://infinite-temple-24050.herokuapp.com';
 
 class ItemsClient {
-  static async getItems() {
+  static async getItems(token) {
     try {
       const response = await fetch(`${BASE_URL}/items`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+          'authorization': 'Bearer ' + token
+        }
       });
       return await response.json();
     } catch (err) {
@@ -12,12 +16,13 @@ class ItemsClient {
     }
   };
 
-  static async postItem(firstValue, secondValue) {
+  static async postItem(firstValue, secondValue, token) {
     try {
       const response = await fetch(`${BASE_URL}/items`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json; charset=utf-8'
+          'Content-Type': 'application/json; charset=utf-8',
+          'authorization': 'Bearer ' + token
         },
         body: JSON.stringify({
           text: firstValue,
@@ -35,12 +40,13 @@ class ItemsClient {
     }
   };
 
-  static async patchItem(item, editedTextValue, editedSumValue) {
+  static async patchItem(item, editedTextValue, editedSumValue, token) {
     try {
       const response = await fetch(`${BASE_URL}/items/${item._id}`, {
         method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json; charset=utf-8'
+          'Content-Type': 'application/json; charset=utf-8',
+          'authorization': 'Bearer ' + token
         },
         body: JSON.stringify({
           text: editedTextValue,
@@ -53,10 +59,13 @@ class ItemsClient {
     }
   };
 
-  static async deleteItem(item) {
+  static async deleteItem(item, token) {
     try {
       const response = await fetch(`${BASE_URL}/items/${item._id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'authorization': 'Bearer ' + token
+        }
       });
       return await response.json();
     } catch (err) {
