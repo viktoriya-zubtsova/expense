@@ -2,7 +2,6 @@ import React from 'react';
 import './InputItem.css';
 
 function InputItem({ onButtonClick, firstValue, secondValue, setFirstValue, setSecondValue}) {
-
   return (
     <div>
       <form className="inputForm">
@@ -28,7 +27,7 @@ function InputItem({ onButtonClick, firstValue, secondValue, setFirstValue, setS
           className="button"
           type="button"
           value="Добавить"
-          onClick={onButtonClick}
+          onClick={() => onButtonClick(firstValue, secondValue)}
         />
       </form>
     </div>

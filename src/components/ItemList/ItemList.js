@@ -3,7 +3,6 @@ import Item from '../Item/Item';
 import './ItemList.css';
 
 function ItemList({ items, onClickEdit, onDeleteClick }) {
-
   return (
     <ol className="list">
       {items.map((item, index) => (
@@ -12,7 +11,7 @@ function ItemList({ items, onClickEdit, onDeleteClick }) {
             index={index + 1}
             item={item}
             onClickEdit={onClickEdit}
-            onDeleteClick={onDeleteClick}
+            onDeleteClick={() => onDeleteClick(item)}
           />
         </li>
       ))}

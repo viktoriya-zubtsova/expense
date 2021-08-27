@@ -1,5 +1,4 @@
-const BASE_URL = 'http://localhost:8000';
-// 'https://infinite-temple-24050.herokuapp.com';
+const BASE_URL = 'https://infinite-temple-24050.herokuapp.com';
 
 class UserClient {
   static async regUser(regUserName, regUserPassword) {

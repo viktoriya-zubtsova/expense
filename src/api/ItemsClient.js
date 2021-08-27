@@ -1,5 +1,5 @@
-const BASE_URL = 'http://localhost:8000';
-  // 'https://infinite-temple-24050.herokuapp.com';
+const BASE_URL ='https://infinite-temple-24050.herokuapp.com';
+const token = localStorage.getItem('token') || '';
 
 class ItemsClient {
   static async getItems(token) {
@@ -16,8 +16,13 @@ class ItemsClient {
     }
   };
 
-  static async postItem(firstValue, secondValue, token) {
+  static async postItem( text, sum ) {
     try {
+      const date = new Date().toLocaleString('ru', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      });
       const response = await fetch(`${BASE_URL}/items`, {
         method: 'POST',
         headers: {
@@ -25,22 +30,18 @@ class ItemsClient {
           'authorization': 'Bearer ' + token
         },
         body: JSON.stringify({
-          text: firstValue,
-          sum: secondValue,
-          date: new Date().toLocaleString('ru', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric'
-          })
+          text,
+          sum,
+          date
         })
       });
-      return await response.json();
+      return await response.json();;
     } catch (err) {
-      console.log(err);
+      console.log('qqqqqq', err);
     }
   };
 
-  static async patchItem(item, editedTextValue, editedSumValue, token) {
+  static async patchItem(item, editedTextValue, editedSumValue) {
     try {
       const response = await fetch(`${BASE_URL}/items/${item._id}`, {
         method: 'PATCH',
@@ -53,13 +54,15 @@ class ItemsClient {
           sum: editedSumValue
         })
       });
-      return await response.json();
+      const a = await response.json();
+      console.log(123, a)
+      return a;
     } catch (err) {
       console.log(err);
     }
   };
 
-  static async deleteItem(item, token) {
+  static async deleteItem(item) {
     try {
       const response = await fetch(`${BASE_URL}/items/${item._id}`, {
         method: 'DELETE',

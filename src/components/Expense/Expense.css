@@ -1,10 +1,3 @@
-.wrap {
-    max-width: 800px;
-    margin: auto;
-    background-color: #b8efec;
-    padding: 2% 5% 5% 5%;
-    font-family: Roboto;
-}
 .title {
     font-weight: normal;
     text-align: center;
@@ -15,4 +8,15 @@
 }
 .userLogin {
     font-size: 18px;
+}
+.userLogin {
+    font-weight: bold;
+}
+.logout {
+    background-color: #7aa37a;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 14px;
+    margin-right: 20px;
 }

@@ -1,14 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Checkbox from '@material-ui/core/Checkbox';
+import UserClient from '../../api/UserClient';
 import './User.css';
 
-function User({ onRegisterUser, onLoginUser }) {
+function User() {
   const [logIn, setLogIn] = useState(true);
   const [logInUsername, setLogInUsername] = useState('');
   const [logInUserPassword, setLogInUserPassword] = useState('');
   const [regUserName, setRegUserName] = useState('');
   const [regUserPassword, setRegUserPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const history = useHistory();
 
   const checkPasswords = (regUserName, regUserPassword, repeatPassword) => {
     if (regUserPassword === repeatPassword) {
@@ -17,6 +20,25 @@ function User({ onRegisterUser, onLoginUser }) {
       alert('Пароль и проверочный пароль не совпадают, попробуй ещё раз');
     }
   }
+
+  const onRegisterUser = async (regUserName, regUserPassword) => {
+    try {
+      await UserClient.regUser(regUserName, regUserPassword);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onLoginUser = async (logInUserName, logInUserPassword) => {
+    try {
+      const result = await UserClient.loginUser(logInUserName, logInUserPassword);
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('user', result.login);
+      history.push('/expense');
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
