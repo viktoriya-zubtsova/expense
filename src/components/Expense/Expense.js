@@ -15,7 +15,7 @@ function Expense() {
 
   useEffect(() => {
     init(token);
-  }, []);
+  }, [token]);
 
   const init = async (token) => {
     try {
